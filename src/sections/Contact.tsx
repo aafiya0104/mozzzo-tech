@@ -160,9 +160,9 @@ export function Contact() {
           {/* Diagonal divider */}
           <div
             ref={dividerRef}
-            className="hidden lg:block absolute left-1/2 top-0 w-px bg-black/10"
+            className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-black/10"
             style={{
-              transform: 'rotate(12deg) translateX(-50%)',
+              transform: 'translateX(-50%)',
               transformOrigin: 'top center',
               willChange: 'height',
             }}
