@@ -26,7 +26,7 @@ export function ParticleField() {
 
     // Check if touch device - reduce particles
     const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-    const particleCount = isTouchDevice ? 30 : 80;
+    const particleCount = isTouchDevice ? 15 : 40;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;

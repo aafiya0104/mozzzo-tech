@@ -108,8 +108,8 @@ export function Footer() {
 
         {/* Marquee content */}
         <div className="marquee-container">
-          <div className="marquee-superfast md:marquee-fast flex items-center gap-8 text-[56px] lg:text-[112px] font-medium whitespace-nowrap">
-            {[...Array(4)].map((_, i) => (
+          <div className="marquee-fast flex items-center gap-8 text-[56px] lg:text-[112px] font-medium whitespace-nowrap">
+            {[...Array(15)].map((_, i) => (
               <span key={i} className="flex items-center gap-8">
                 {marqueeText.split('').map((char, j) => (
                   <span

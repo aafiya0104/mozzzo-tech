@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Navigation } from './components/Navigation';
@@ -16,11 +16,14 @@ import { Features } from './sections/Features';
 import { Contact } from './sections/Contact';
 import { Footer } from './sections/Footer';
 import { FloatingWidgets } from './components/FloatingWidgets';
+import LoadingScreen from './components/LoadingScreen';
 import { siteConfig } from './config';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     if (siteConfig.title) {
       document.title = siteConfig.title;
@@ -39,36 +42,46 @@ function App() {
     };
   }, []);
 
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
   return (
-    <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* Noise texture overlay */}
-      <div className="noise-overlay" />
+    <>
+      {/* Loading Screen */}
+      {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
 
-      {/* Custom cursor */}
-      <CustomCursor />
+      {/* Main App Content */}
+      <div className={`relative min-h-screen bg-background text-foreground overflow-x-hidden main-content ${!isLoading ? 'visible' : ''}`}>
+        {/* Noise texture overlay */}
+        <div className="noise-overlay" />
 
-      {/* Particle field */}
-      <ParticleField />
+        {/* Custom cursor */}
+        <CustomCursor />
 
-      {/* Navigation */}
-      <Navigation />
+        {/* Particle field */}
+        <ParticleField />
 
-      {/* Main content */}
-      <main>
-        <Hero />
-        <Features />
-        <About />
-        <Works />
-        <Services />
-        <FAQ />
-        {/* <Testimonials /> */}
-        {/* <Pricing /> */}
-        {/* <Blog /> */}
-        <Contact />
-        <Footer />
-      </main>
-      <FloatingWidgets />
-    </div>
+        {/* Navigation */}
+        <Navigation />
+
+        {/* Main content */}
+        <main>
+          <Hero />
+          <Features />
+          <About />
+          <Works />
+          <Services />
+          <FAQ />
+          {/* <Testimonials /> */}
+          {/* <Pricing /> */}
+          {/* <Blog /> */}
+          <Contact />
+          <Footer />
+        </main>
+        <FloatingWidgets />
+      </div>
+    </>
   );
 }
 

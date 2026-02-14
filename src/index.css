@@ -365,6 +365,15 @@
   }
 }
 
+.main-content {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.main-content.visible {
+  opacity: 1;
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   :root {
@@ -374,5 +383,69 @@
 
   .custom-cursor {
     display: none;
+  }
+
+  .noise-overlay {
+    animation: none !important;
+    opacity: 0.01;
+    /* Lower opacity for static noise */
+  }
+}
+
+@media (max-width: 1024px) {
+  .noise-overlay {
+    animation: none !important;
+  }
+}
+
+/* ============================================ */
+/* LOADING SCREEN STYLES */
+/* ============================================ */
+
+/* Main content fade-in for loading screen */
+.main-content {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.main-content.visible {
+  opacity: 1;
+}
+
+/* ============================================ */
+/* MARQUEE ANIMATION STYLES */
+/* ============================================ */
+
+/* Marquee container */
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+}
+
+/* Fast marquee animation for footer */
+.marquee-fast {
+  animation: marquee-scroll 20s linear infinite;
+}
+
+/* Keyframe for continuous marquee scroll */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause on hover (optional) */
+.marquee-container:hover .marquee-fast {
+  animation-play-state: paused;
+}
+
+/* For mobile - faster speed */
+@media (max-width: 768px) {
+  .marquee-fast {
+    animation: marquee-scroll 15s linear infinite;
   }
 }

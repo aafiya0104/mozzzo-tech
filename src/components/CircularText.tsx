@@ -78,6 +78,7 @@ export function CircularText({ text, radius = 60, className = "" }: CircularText
               height: `${radius}px`,
               transform: `translateX(-50%) rotate(${i * degree}deg)`,
               transformOrigin: `center ${radius}px`,
+              willChange: "transform",
             }}
           >
             {char}

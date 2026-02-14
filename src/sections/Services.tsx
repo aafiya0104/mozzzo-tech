@@ -35,12 +35,12 @@ export function Services() {
           { scale: 1, opacity: 1, duration: 0.7, ease: 'expo.out' }
         );
 
-        // Subtitle blur
+        // Subtitle slide in (matching title)
         tl.fromTo(
           subtitleRef.current,
-          { filter: 'blur(15px)', opacity: 0 },
-          { filter: 'blur(0)', opacity: 1, duration: 0.6, ease: 'power2.out' },
-          '-=0.4'
+          { scale: 0.9, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.7, ease: 'expo.out' },
+          '-=0.5'
         );
 
         // Service items stagger
@@ -76,12 +76,20 @@ export function Services() {
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    // Throttle: only update every frame essentially, but let GSAP handle interpolation
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const section = sectionRef.current;
     if (!section || !imageRef.current) return;
 
     const rect = section.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
+    
+    // Simple throttle by checking distance change or time could be done, 
+    // but GSAP handles this well. We'll just ensure we don't do excessive calcs.
+    if (Math.abs(x - mousePos.current.x) < 2 && Math.abs(y - mousePos.current.y) < 2) return;
+
     mousePos.current = { x, y };
 
     gsap.to(imageRef.current, {
@@ -89,6 +97,7 @@ export function Services() {
       y: y - 200,
       duration: 0.15,
       ease: 'power2.out',
+      overwrite: 'auto', // prevented conflict
     });
   };
 

@@ -5,11 +5,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const features = [
-  "• FREE LOGO",
-  "• FREE DOMAIN",
-  "• FREE HOSTING",
-  "• FREE SEO",
-  "• LIVE SUPPORT"
+  "• GOOGLE RANKING",
+  "• MARKET RESEARCH",
+  "• GOOGLE MAPS PRESENCE",
+  "• DOMAIN INCLUDED",
+  "• SEO SETUP",
+  "• LIVE SUPPORT",
+  "• EASY UPDATES"
 ];
 
 export function Features() {
