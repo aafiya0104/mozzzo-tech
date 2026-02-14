@@ -162,6 +162,9 @@ export function Hero() {
           alt="Hero"
           className="w-full h-full object-cover"
           style={{ filter: 'brightness(0.9)' }}
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
         />
         {/* Chromatic aberration effect layers */}
         <div

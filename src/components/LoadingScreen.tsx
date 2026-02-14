@@ -28,7 +28,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
     <div className="loading-screen">
       <div className="logo-container">
         <span className="slashes">//</span>
-        <span className="mozzzo">mozzzo</span>
+        <span className="mozzzo">MOZZZO</span>
       </div>
     </div>
   );

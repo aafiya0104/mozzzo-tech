@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: var(--navy, #101957);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,8 +16,10 @@
   display: flex;
   align-items: center;
   font-size: 48px;
-  font-style: italic;
-  font-weight: 600;
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: -0.02em;
   position: relative;
 }
 
@@ -29,7 +31,7 @@
 }
 
 .mozzzo {
-  color: #101957;
+  color: #ffffff;
   position: relative;
   margin-left: 0;
   clip-path: inset(0 100% 0 0);

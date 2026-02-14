@@ -344,6 +344,8 @@ export function Contact() {
               src={contactConfig.image}
               alt="Contact"
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
 
             {/* Decorative blocks */}

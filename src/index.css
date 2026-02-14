@@ -422,17 +422,16 @@
   position: relative;
 }
 
-/* Fast marquee animation for footer */
+/* Fast marquee animation for footer - 2 copies + -50% = seamless loop, no cut-off */
 .marquee-fast {
-  animation: marquee-scroll 20s linear infinite;
+  animation: marquee-scroll 10s linear infinite;
 }
 
-/* Keyframe for continuous marquee scroll */
+/* Keyframe: -50% with 2 copies = one full copy scrolls out, loop is continuous */
 @keyframes marquee-scroll {
   0% {
     transform: translateX(0);
   }
-
   100% {
     transform: translateX(-50%);
   }
@@ -443,9 +442,38 @@
   animation-play-state: paused;
 }
 
-/* For mobile - faster speed */
+/* Mobile: same speed, already fast enough */
 @media (max-width: 768px) {
   .marquee-fast {
-    animation: marquee-scroll 15s linear infinite;
+    animation: marquee-scroll 8s linear infinite;
+  }
+}
+
+/* ============================================ */
+/* SHINY TEXT (React Bits-style metallic sheen) */
+/* ============================================ */
+.shiny-text {
+  color: #ffffff;
+  background: linear-gradient(
+    110deg,
+    #ffffff 0%,
+    #ffffff 36%,
+    var(--highlight, #C8B59A) 50%,
+    #ffffff 64%,
+    #ffffff 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shiny-sweep 3.5s ease-in-out infinite;
+}
+
+@keyframes shiny-sweep {
+  0%, 100% {
+    background-position: 150% center;
+  }
+  50% {
+    background-position: -50% center;
   }
 }

@@ -10,6 +10,14 @@ interface Particle {
   speed: number;
 }
 
+// Opacity multiplier: 1 at top (hero), ~0.12 when scrolled down so particles don't clutter light sections
+function getScrollOpacityMultiplier(): number {
+  const y = typeof window === 'undefined' ? 0 : window.scrollY;
+  if (y < 300) return 1;
+  if (y > 900) return 0.12;
+  return 1 - (y - 300) / 600 * 0.88;
+}
+
 export function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
@@ -24,9 +32,10 @@ export function ParticleField() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Check if touch device - reduce particles
+    // Reduce particles on touch devices and when user prefers reduced motion (helps low-end devices)
     const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-    const particleCount = isTouchDevice ? 15 : 40;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const particleCount = prefersReducedMotion ? 0 : isTouchDevice ? 12 : 24;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -35,6 +44,10 @@ export function ParticleField() {
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+
+    if (particleCount === 0) {
+      return () => window.removeEventListener('resize', resizeCanvas);
+    }
 
     // Initialize particles
     particlesRef.current = Array.from({ length: particleCount }, () => ({
@@ -55,14 +68,15 @@ export function ParticleField() {
 
     const animate = () => {
       frameCountRef.current++;
-      
-      // Render every 2nd frame for performance
+      const opacityMultiplier = getScrollOpacityMultiplier();
+
+      // Render every 2nd frame for performance on low-end devices
       if (frameCountRef.current % 2 === 0) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         particlesRef.current.forEach((particle, i) => {
-          // Mouse repulsion (only process every 5th particle for performance)
-          if (i % 5 === 0) {
+          // Mouse repulsion (only process every 4th particle for performance)
+          if (i % 4 === 0) {
             const dx = particle.x - mouseRef.current.x;
             const dy = particle.y - mouseRef.current.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
@@ -92,10 +106,10 @@ export function ParticleField() {
           if (particle.y < 0) particle.y = canvas.height;
           if (particle.y > canvas.height) particle.y = 0;
 
-          // Draw particle
+          // Draw particle (opacity reduced when scrolled so they don't clutter light sections)
           ctx.beginPath();
           ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+          ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity * opacityMultiplier})`;
           ctx.fill();
         });
       }

@@ -147,6 +147,8 @@ export function Services() {
             src={services[activeIndex].image}
             alt={services[activeIndex].title}
             className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
         )}
       </div>

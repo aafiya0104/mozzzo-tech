@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Instagram, Dribbble, ArrowUpRight } from 'lucide-react';
 import { footerConfig } from '../config';
+import { FooterTypewriter } from '../components/FooterTypewriter';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -97,42 +98,16 @@ export function Footer() {
       ref={sectionRef}
       className="relative pt-20 pb-12 px-8 lg:px-16 bg-navy overflow-hidden"
     >
-      {/* Marquee section */}
+      {/* Animated tagline — typewriter style, no marquee cut-off */}
       <div
         ref={marqueeRef}
-        className="relative mb-20 overflow-hidden"
+        className="relative mb-20 flex items-center justify-center text-center px-4"
       >
-        {/* Gradient masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-navy to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-navy to-transparent z-10" />
-
-        {/* Marquee content */}
-        <div className="marquee-container">
-          <div className="marquee-fast flex items-center gap-8 text-[56px] lg:text-[112px] font-medium whitespace-nowrap">
-            {[...Array(15)].map((_, i) => (
-              <span key={i} className="flex items-center gap-8">
-                {marqueeText.split('').map((char, j) => (
-                  <span
-                    key={j}
-                    className={
-                      highlightChars.includes(char)
-                        ? 'text-highlight animate-pulse-glow'
-                        : 'text-white'
-                    }
-                    style={
-                      highlightChars.includes(char)
-                        ? { textShadow: '0 0 20px var(--highlight)' }
-                        : undefined
-                    }
-                  >
-                    {char}
-                  </span>
-                ))}
-                <span className="text-white/30 mx-4">&bull;</span>
-              </span>
-            ))}
-          </div>
-        </div>
+        <FooterTypewriter
+          text={marqueeText}
+          highlightChars={highlightChars}
+          className="text-[26px] sm:text-[30px] lg:text-[38px] font-medium tracking-tight"
+        />
       </div>
 
       {/* Top border */}

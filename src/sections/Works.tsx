@@ -181,6 +181,8 @@ export function Works() {
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transition-all duration-600 group-hover:scale-110 group-hover:brightness-110"
+                  loading="lazy"
+                  decoding="async"
                 />
 
                 {/* Overlay */}

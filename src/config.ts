@@ -466,7 +466,7 @@ export interface FooterConfig {
 }
 
 export const footerConfig: FooterConfig = {
-  marqueeText: "Let's Build Something Amazing Together",
+  marqueeText: "Let's Build Something Amazing!",
   marqueeHighlightChars: ["B", "A"],
   navLinks1: [
     { label: "Home", href: "#hero" },

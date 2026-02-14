@@ -138,6 +138,8 @@ export function About() {
                 src={aboutConfig.image1}
                 alt={aboutConfig.image1Alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
             </div>
@@ -152,6 +154,8 @@ export function About() {
                 src={aboutConfig.image2}
                 alt={aboutConfig.image2Alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
             </div>
