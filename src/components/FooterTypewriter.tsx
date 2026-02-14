@@ -14,7 +14,7 @@ const FADE_DURATION_MS = 550;
 /**
  * Typewriter with shiny text effect. Types the phrase, holds, then fades out and repeats.
  */
-export function FooterTypewriter({ text, highlightChars, className = '' }: FooterTypewriterProps) {
+export function FooterTypewriter({ text, highlightChars: _highlightChars, className = '' }: FooterTypewriterProps) {
   const [displayLength, setDisplayLength] = useState(0);
   const [phase, setPhase] = useState<'typing' | 'hold' | 'fade'>('typing');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
